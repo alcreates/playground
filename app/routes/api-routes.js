@@ -7,7 +7,7 @@ var Character 	= require("../model/players.js"); // Pulls out the Character Mode
 module.exports = function(app){
 
 	// Search for Specific Character (or all characters) then provides JSON
-	app.get('/api/:characters?', function(req, res){
+	app.get('/api/:user?', function(req, res){
 
 		// If the user provides a specific character in the URL...
 		if(req.params.characters){
@@ -36,21 +36,21 @@ module.exports = function(app){
 	});
 
 	// If a user sends data to add a new character...
-	app.post('/api/new', function(req, res){
+	app.post('/api/newPlayer', function(req, res){
 
 		// Take the request...
-		var character = req.body;
+		var player = req.body;
 
-		// Create a routeName 
-		var routeName = character.name.replace(/\s+/g, '').toLowerCase();
-
+		
 		// Then add the character to the database using sequelize
-		Character.create({
-			name: character.name,
-			role: character.role,
-			age: character.age,
-			forcePoints: character.forcePoints
+		Player.create({
+			Screen_Name: player.name,
+			Password : player.password
+			
+		}).then(function(){
+			res.redirect("/gameroom");
+
 		});
 		
-	})
+	});
 }
