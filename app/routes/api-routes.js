@@ -42,7 +42,7 @@ module.exports = function(app) {
             }
 
         }).then(function(result) {
-
+        	console.log(result);
             console.log("this is the users screenname " + result[0].Screen_Name);
             console.log("this is the users password " + result[0].Password);
 
@@ -65,7 +65,7 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/api/newlogin', function(req, res) {
+    app.post('/api/newMember', function(req, res) {
 
         // Take the request...
         var player = req.body;

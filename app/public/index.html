@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- App Icon Image -->
+    <link rel="apple-touch-icon" src ="images/icon.png">
+    <!-- Allows application to become a mobile app -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Stops user from being able to double-tap zoom -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"  media="screen,projection"/>
+    <!-- Local css -->
+    <link rel="stylesheet" src="css/style.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" src="css/animate.css">
+  </head>
+  <body>
+
+<!-- Loading screen. So nobody will see the ugliness of divs rolling in. -->
+<div id="load_screen"><div id="loading"></div></div>
+
+<!-- Game Squared Card -->
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card grey darken-3 z-depth-5">
+      <div class="card-content white-text">
+
+<!-- Card title -->
+<h3 class="center-align welcomeCenter animated pulse">Game^2</h3>
+
+<!-- Pong gif -->
+<div class="card-image animated pulse pongGif">
+      <img class="animated pulse" src="http://pages.uoregon.edu/duckball/html/pong.gif"><br>
+</div>
+        
+<!-- Social feed -->
+<div class="row social-feed animated pulse">
+  <div class="col s12 m12">
+  <h5>Recent Games Feed:</h5>
+    <div class="card-panel orange accent-4 z-depth-5">
+      <span class="white-text">
+      <!-- winner "beat" loser "in" gameName -->
+      - Al beat Eric in Tic-Tac Toe<br>
+      - Adam beat Al in Pong<br>
+      - Eric beat Adam in Flappy Bird<br>
+      - winner "beat" loser "in" gameName<br>
+      - Five of these items should suffice
+      </span>
+    </div>
+  </div>
+</div>
+<!-- End of social feed -->
+
+<!-- loginDiv -->
+<div class="row loginDiv animated bounceIn">
+  <p class="center-align">Login with your credentials.</p>
+   <div class="col s12 m12">
+    <div class="card-panel black z-depth-3">
+      <span class="white-text">
+      <input placeholder="Username:" id="ScreenName" type="text" class="validate">
+      <input placeholder="Password:" id="password" type="text" class="validate">
+      </span>
+      <!-- Submit button for login -->
+      <div class="card-action center-align">
+        <a id="loginSubmit" href="#">Submit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Div -->
+<div class="row createDiv animated bounceIn">
+    <p class="center-align">Create an account.</p>
+     <div class="col s12 m12">
+      <div class="card-panel black z-depth-3">
+        <span class="white-text">
+        <input placeholder="Username:" id="newSreenName" type="text" class="validate">
+        <input placeholder="Password:" id="newPassword" type="text" class="validate">
+        <input placeholder="Confirm your password:" id="confirmPassword" type="text" class="validate">
+        </span>
+        <!-- Submit button for login -->
+        <div class="card-action center-align">
+          <a id="createSubmit" href="#">Submit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Game center -->
+<div class="row onlinePlayers animated pulse ">
+  <div class="col s12 m12">
+    <div class="card blue-grey darken-1 z-depth-5">
+      <div class="card-content white-text">
+        <span class="card-title"><center>Gamers online</center></span>
+        <p>
+        <!-- Run a for-loop in jQuery to assign ID's to each play button. -->
+        <table class="centered">
+        <thead>
+          <tr>
+              <th data-field="name">Name</th>
+              <th data-field="playRequest">Send Play Request</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alvin</td>
+            <td><a class="waves-effect waves-light btn sendPlayRequest">Play</a></td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td><a class="waves-effect waves-light btn sendPlayRequest">Play</a></td>
+          </tr>
+          <tr>
+            <td>Jonathan</td>
+            <td><a class="waves-effect waves-light btn sendPlayRequest">Play</a></td>
+          </tr>
+        </tbody>
+      </table>
+            
+        </p>
+      </div>
+      <div class="card-action center-align">
+        <a href="#">Random player</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Game -->
+  <!-- Make these modals. -->
+    <!-- Leaderboards -->
+    <!-- Chat -->
+
+
+</div> <!-- End of Card Content -->
+
+<!-- Login and Create Buttons -->
+<div class="card-action center-align welcomeButtons">
+  <a id="loginButton" href="#">Login</a>
+  <a id="createButton" href="#">Create</a>
+</div>
+
+
+    </div>
+  </div>
+</div>
+          
+
+    <!--Import jQuery before materialize.js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script type="text/javascript" > //src= "js/spa.js"
+      // Successfully connected.
+
+// Loading screen
+window.addEventListener("load", function(){
+  var load_screen = document.getElementById("load_screen");
+  document.body.removeChild(load_screen);
+});
+
+$(".loginDiv").hide();
+$(".createDiv").hide();
+$(".onlinePlayers").hide();
+
+// Custom animations. Works with all browsers.
+$.fn.extend({
+    animateCss: function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+        });
+    }
+});
+
+$("#loginButton").click(function(){
+  $(".loginDiv").show();
+  $(".welcomeButtons").hide();
+  $(".social-feed").hide();
+});
+
+$("#createButton").click(function(){
+  $(".createDiv").show();
+  $(".welcomeButtons").hide();
+  $(".social-feed").hide();
+});
+
+$("#loginSubmit").click(function(){
+  $(".pongGif").hide();
+  $(".loginDiv").hide();
+  $(".onlinePlayers").show();
+});
+
+$(".welcomeCenter").click(function(){
+  $(".social-feed").show();
+  $(".loginDiv").hide();
+  $(".createDiv").hide();
+  $(".welcomeButtons").show();
+  $(".onlinePlayers").hide();
+  $(".pongGif").show();
+});
+
+
+    </script>
+    <script type="text/javascript">
+
+    //Logs in existing member, validates passwords and redirects user to gameroom
+      $("#loginSubmit").on('click', function(){ 
+        var currentURL = window.location.origin; 
+        var player = { 
+          screenName : $("#screenName").val(), 
+          password : $("#password").val() } 
+          $.post(currentURL + '/api/playerlogin', player ).success(function(data){ 
+            console.log(data); 
+            if (typeof data.redirect == 'string'){ 
+              window.location = data.redirect 
+            }else{ alert("Error: wrong password/screenName")
+             } 
+           }); 
+        });
+      //Creates new player, checks password entry, and redirects player in to gameroom
+      $("#createSubmit").on('click', function(){
+
+        var currentURL = window.location.origin;
+        var newPlayer = {
+          screenName : $("#newScreenName").val(),
+          password : $("#newPassword").val()
+        }
+
+        $.post(currentURL + '/api/newMember', newPlayer).success(function(data){
+
+        })
+
+      })
+
+
+    </script>
+  </body>
+</html>

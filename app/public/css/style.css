@@ -1,0 +1,20 @@
+html {
+  background-color: orange;
+}
+
+/*Instead of flashing a white screen, an orange screen is shown while the page loads.*/
+div#load_screen{
+  background: orange;
+  opacity: 1;
+  position: fixed;
+  z-index:10;
+  top: 0px;
+  width: 100%;
+  height: 1600px;
+}
+div#load_screen > div#loading{
+  color:#FFF;
+  width:120px;
+  height:24px;
+  margin: 300px auto;
+}

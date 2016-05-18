@@ -89,6 +89,14 @@
  			$("#newSubmit").on('click', function(){
 
  				var currentURL = window.location.origin;
+ 				var newPlayer = {
+ 					screenName : $("#newScreenName").val(),
+ 					password : $("#newPassword").val()
+ 				}
+
+ 				$.post(currentURL + '/api/newMember', newPlayer).success(function(data){
+
+ 				})
 
  			})
  			

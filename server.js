@@ -15,7 +15,22 @@ var path = require('path');
 var app = express();
 var PORT = process.env.PORT || 8080;
 
+app.use(express.static(path.join(__dirname + '/public')));
+// app.use('/images',express.static(path.join(__dirname + '/images')));
+// app.use('/js',express.static(path.join(__dirname + '/js')));
+// app.use('/css',express.static(path.join(__dirname + '/css')));
+// app.use('/public/font',express.static(path.join(__dirname + '/public/font')));
+// app.use('/public/fonts',express.static(path.join(__dirname + '/public/fonts')));
 
+// app.use('/public/oauth', express.static(path.join(__dirname + '/public/oauth')));
+
+// app.use('/assets', express.static(path.join(__dirname + '/public/assets')));
+// app.use('/css', express.static(path.join(__dirname + '/public/assets/css')));
+// app.use('/font', express.static(path.join(__dirname + '/public/assets/font')));
+// app.use('/fonts', express.static(path.join(__dirname + '/public/assets/fonts')));
+// app.use('/images', express.static(path.join(__dirname + '/public/assets/images')));
+// app.use('/js',express.static(path.join(__dirname + '/public/assets/js')));
+// app.use('/oauth', express.static(path.join(__dirname + '/public/assets/oauth')));
 
 
 
