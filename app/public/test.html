@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="">
 	<head>
 		<meta charset="utf-8">
@@ -19,21 +19,38 @@
 	<body>
 		<h1 class="text-center">Hello World</h1>
 
-		<form action="/api/newPlayer" method="POST" role="form">
+		<form action="" method="" role="form">
 			<legend>LOGIN</legend>
 		
 			<div class="form-group">
-				<label for="">label</label>
-				<input type="text" class="form-control" id="" placeholder="Screen Name">
+				<label for="">name</label>
+				<input type="text" class="form-control" id="screenName" placeholder="Screen Name">
 			</div>
 			
 			<div class="form-group">
-				<label for="">label</label>
-				<input type="text" class="form-control" id="" placeholder="Password">
+				<label for="">password</label>
+				<input type="text" class="form-control" id="password" placeholder="Password">
 			</div>
 			
 		
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button id = "loginSubmit" type="submit" class="btn btn-primary">Submit</button>
+		</form>
+
+		<form action="" method="" role="form">
+			<legend>New Member</legend>
+		
+			<div class="form-group">
+				<label for="">name</label>
+				<input type="text" class="form-control" id="newScreenName" placeholder="Screen Name">
+			</div>
+			
+			<div class="form-group">
+				<label for="">password</label>
+				<input type="text" class="form-control" id="newPassword" placeholder="Password">
+			</div>
+			
+		
+			<button id = "newSubmit" type="submit" class="btn btn-primary">Submit</button>
 		</form>
 
 		<!-- jQuery -->
@@ -41,6 +58,40 @@
 		<!-- Bootstrap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="Hello World"></script>
+ 		<script type="text/javascript">
+ 			$("#loginSubmit").on('click', function(){
+
+ 			var currentURL = window.location.origin;	
+ 			var player = {
+ 				screenName : $("#screenName").val(),
+ 				password : $("#password").val()
+
+ 			}
+ 	
+
+ 			$.post(currentURL + '/api/playerlogin', player ).success(function(data){
+ 					console.log(data);
+ 				if (typeof data.redirect == 'string'){
+ 						 window.location = data.redirect
+
+ 				}else{
+
+ 					alert("Error: wrong password/screenName")
+ 				}
+                   
+ 				 
+ 				//window.location.replace("http://stackoverflow.com");
+ 			 });	
+ 				
+
+ 			});
+
+ 			$("#newSubmit").on('click', function(){
+
+ 				var currentURL = window.location.origin;
+
+ 			})
+ 			
+ 		</script>
 	</body>
 </html>

@@ -1,56 +1,81 @@
 // Dependencies
 // =============================================================
-var Character 	= require("../model/players.js"); // Pulls out the Character Model
+var Player = require("../model/players.js"); // Pulls out the Character Model
 
 // Routes
 // =============================================================
-module.exports = function(app){
+module.exports = function(app) {
+// var currentURL = window.location.origin;
+    // Search for Specific Character (or all characters) then provides JSON
+    app.get('/api/userList', function(req, res) {
 
-	// Search for Specific Character (or all characters) then provides JSON
-	app.get('/api/:user?', function(req, res){
+        // If the user provides a specific character in the URL...
 
-		// If the user provides a specific character in the URL...
-		if(req.params.characters){
+        // Then display the JSON for ONLY that character.
+        // (Note how we're using the ORM here to run our searches)
+        Player.findAll({}).then(function(result) {
+            res.json(result);
+        })
 
-			// Then display the JSON for ONLY that character.
-			// (Note how we're using the ORM here to run our searches)
-			Character.findAll({
-				where: {
-					routeName: req.params.characters
-				}
-			}).then(function(result){
-				res.json(result);
-			})
-		}
 
-		// Otherwise...
-		else{
-			// Otherwise display the data for all of the characters. 
-			// (Note how we're using Sequelize here to run our searches)
-				Character.findAll({})
-					.then(function(result){
-						res.json(result);
-				})
-			};
+        // Otherwise...
 
-	});
+        // Otherwise display the data for all of the characters. 
+        // (Note how we're using Sequelize here to run our searches)
 
-	// If a user sends data to add a new character...
-	app.post('/api/newPlayer', function(req, res){
 
-		// Take the request...
-		var player = req.body;
+    });
 
-		
-		// Then add the character to the database using sequelize
-		Player.create({
-			Screen_Name: player.name,
-			Password : player.password
-			
-		}).then(function(){
-			res.redirect("/gameroom");
+    // If a user sends data to add a new character...
+    app.post('/api/playerlogin', function(req, res) {
 
-		});
-		
-	});
+        // Take the request...
+        var player = req.body;
+        var playerPassword = player.password
+        console.log("this is player screen name " + player.screenName);
+        console.log("this is player password " + player.Password);
+
+        // Then add the character to the database using sequelize
+        Player.findAll({
+            where: {
+                Screen_Name: player.screenName
+            }
+
+        }).then(function(result) {
+
+            console.log("this is the users screenname " + result[0].Screen_Name);
+            console.log("this is the users password " + result[0].Password);
+
+
+
+
+            if (result[0].Screen_Name == player.screenName && result[0].Password == playerPassword) {
+                console.log("TRUE")
+                    // //res.redirect('/playroom');
+                res.send({redirect: '/playroom'});
+
+                
+
+            } else {
+                res.send({});
+            }
+
+        }).catch(function(err) {
+            console.log("Wrong username or password");
+        });
+    });
+
+    app.post('/api/newlogin', function(req, res) {
+
+        // Take the request...
+        var player = req.body;
+
+
+        // Then add the character to the database using sequelize
+        Player.create({
+            Screen_Name: player.screenName,
+            Password: player.password,
+
+        });
+    });
 }

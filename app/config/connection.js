@@ -6,11 +6,11 @@ var Sequelize = require("sequelize");
 var source = {
 
     localhost: {
-        port: 3306,
+        port: 3000,
         host: 'localhost',
         user: 'root',
-        password: "Njmitx123",
-        database: "starwars"
+        password: "darksouls",
+        database: "gametest"
     },
 
     jawsDB: {
@@ -23,7 +23,7 @@ var source = {
 }
 
 // Selects a connection (can be changed quickly as needed)
-var selectedSource = source.jawsDB;
+var selectedSource = source.localhost;
 
 // Creates mySQL connection using Sequelize
 var sequelize = new Sequelize(selectedSource.database, selectedSource.user, selectedSource.password, {
