@@ -52,7 +52,19 @@ module.exports = function(app) {
             if (result[0].Screen_Name == player.screenName && result[0].Password == playerPassword) {
                 console.log("TRUE")
                     // //res.redirect('/playroom');
-                res.send({redirect: '/playroom'});
+                
+                Player.update(
+                    {
+                        Willing_To_Play: true,
+                    },
+                    {
+                        where:{
+                            id: result[0].ID,
+                        }
+                    
+                }).then(function(){
+                    res.send({redirect: '/playroom'});
+                });
 
                 
 
