@@ -234,25 +234,28 @@
 
             alert("invalid password");
         }
-    }); 
+    });
 
-    // < tr >
-    //     < td > Alan < /td> < td > < a class = "waves-effect waves-light btn sendPlayRequest" > Play < /a></td >
-    //     < /tr>
+
 
     function getPlayers() {
         var currentURL = window.location.origin;
         $.get(currentURL + '/api/userList', function(data) {
-                //console.log("testing get players "  + data[0].Screen_Name);
-                for (var i = 0; i < data.length; i++) {
-                    console.log(data[i].Screen_Name);
-                    $("#playersTable").append("<tr><td>" + data[i].Screen_Name + "</td><td><a class='waves-effect waves-light btn' sendPlayRequest>Play</a></td> < /tr>" )
+            //console.log("testing get players "  + data[0].Screen_Name);
 
-                    }
 
-                })
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].Screen_Name);
 
-        }
+                if (data[i].Willing_To_Play == 1) {
+                    $("#playersTable").append("<tr><td>" + data[i].Screen_Name + "</td><td><a class='waves-effect waves-light btn' sendPlayRequest>Play</a></td> < /tr>")
+
+                }
+            }
+
+        })
+
+    }
     </script>
 </body>
 
