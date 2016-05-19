@@ -33,7 +33,7 @@ module.exports = function(app) {
         var player = req.body;
         var playerPassword = player.password
         console.log("this is player screen name " + player.screenName);
-        console.log("this is player password " + player.Password);
+        console.log("this is player password " + player.password);
 
         // Then add the character to the database using sequelize
         Player.findAll({
@@ -42,7 +42,7 @@ module.exports = function(app) {
             }
 
         }).then(function(result) {
-        	console.log(result);
+        	//console.log(result);
             console.log("this is the users screenname " + result[0].Screen_Name);
             console.log("this is the users password " + result[0].Password);
 

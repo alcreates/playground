@@ -13,9 +13,11 @@ var path = require('path');
 // Sets up the Express App
 // =============================================================
 var app = express();
+
+app.use(express.static(__dirname + '/public'));
 var PORT = process.env.PORT || 8080;
 
-app.use(express.static(path.join(__dirname + '/public')));
+
 // app.use('/images',express.static(path.join(__dirname + '/images')));
 // app.use('/js',express.static(path.join(__dirname + '/js')));
 // app.use('/css',express.static(path.join(__dirname + '/css')));
